@@ -1,9 +1,15 @@
-import React, { useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css'
+import { API_BASE_URL } from "./apiConfig.ts";
+import type { Advantage } from "./App.tsx";
 
-const InfoGrid = () => {
-    const blocksRef = useRef<(HTMLDivElement | null)[]>([]);
 
+
+export default function InfoGrid() {
+    const [items, setItems] = useState<Advantage[]>([]);
+    const blocksRef = useRef<Array<HTMLDivElement | null>>([]);
+
+    // обработчик мыши (лазерный эффект)
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
         const block = blocksRef.current[index];
         if (!block) return;
@@ -12,7 +18,7 @@ const InfoGrid = () => {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const effect = block.querySelector('.info-block-effect') as HTMLElement;
+        const effect = block.querySelector('.info-block-effect') as HTMLElement | null;
         if (effect) {
             effect.style.left = x + 'px';
             effect.style.top = y + 'px';
@@ -23,30 +29,53 @@ const InfoGrid = () => {
         blocksRef.current[index] = el;
     };
 
-    const infoData = [
-        { label: "мы", value: "1", desc: "на рынке" },
-        { label: "гарантируем", value: "50%", desc: "безопасность" },
-        { label: "календарик за", value: "2001", desc: "в подарок" },
-        { label: "путешествие", value: "597", desc: "дней" }
+    useEffect(() => {
+        let mounted = true;
+        async function load() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/advantages/`);
+                if (!res.ok) throw new Error(`Status ${res.status}`);
+                const data = await res.json();
+                if (mounted) setItems(data);
+            } catch (err) {
+                console.error("Failed to load advantages:", err);
+            }
+        }
+        load();
+        return () => { mounted = false; };
+    }, []);
+
+    // fallback: если API пустой, можно отрисовать статические блоки
+    const fallback = [
+        { id: 0, label: "мы", value: "1", description: "на рынке" },
+        { id: 1, label: "гарантируем", value: "50%", description: "безопасность" },
+        { id: 2, label: "календарик за", value: "2001", description: "в подарок" },
+        { id: 3, label: "путешествие", value: "597", description: "дней" },
     ];
+
+    const toRender = items.length ? items : fallback;
 
     return (
         <div className="info-grid">
-            {infoData.map((item, index) => (
+            {toRender.map((item: Advantage, index) => (
                 <div
-                    key={index}
+                    key={item.id}
                     className="info-block"
                     ref={(el) => setBlockRef(el, index)}
                     onMouseMove={(e) => handleMouseMove(e, index)}
                 >
-                    <div className="info-block-effect"></div>
+                    <div className="info-block-effect" />
+                    {/* при наличии image_url показываем картинку */}
+                    {/*{item.image_url ? (*/}
+                    {/*    <div className="info-image-wrap">*/}
+                    {/*        <img src={item.image_url} alt={item.label} className="info-image" />*/}
+                    {/*    </div>*/}
+                    {/*) : null}*/}
                     <p className="info-label">{item.label}</p>
                     <p className="info-value">{item.value}</p>
-                    <p className="info-desc">{item.desc}</p>
+                    <p className="info-desc">{item.description}</p>
                 </div>
             ))}
         </div>
     );
-};
-
-export default InfoGrid;
+}
