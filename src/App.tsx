@@ -1,33 +1,62 @@
-import { useState } from 'react'
+import spaceXlogo from '../src/assets/spaceXlogo.png'
+import marsIcon from '../src/assets/mars.png'
+import rocketIcon from '../src/assets/rocket.png'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+    return (
+        <div className="landing">
+            {/* ====== Навигация ====== */}
+            <header className="header">
+                <a href="https://www.spacex.com" className="logo">
+                    <div className="corner-top-right"></div>
+                    <div className="corner-bottom-left"></div>
+                    <img src={spaceXlogo} alt="SpaceX"/>
+                </a>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+                <nav className="menu">
+                    <a href="#">Главная</a>
+                    <a href="#">Технология</a>
+                    <a href="#">График полетов</a>
+                    <a href="#">Гарантии</a>
+                    <a href="#">О компании</a>
+                    <a href="#">Контакты</a>
+                </nav>
+            </header>
+            <main className="all-content-block">
+                <div className="planet-block">
+                    <img src={rocketIcon} alt="Rocket" className="rocket"/>
+                    <img src={marsIcon} alt="Mars" className="planet"/>
+                    <div className="curved-line"/>
+                    <button className="start-btn">Начать путешествие</button>
+                    <div className="text-block">
+                        <h1 className="title">Путешествие</h1>
+                        <p className="subtitle">на красную планету</p>
+                    </div>
+                </div>
+                <div className="info-grid">
+                    <div className="info-block">
+                        <p className="info-block-effect">мы</p>
+                        <p className="info-block-effect">1</p>
+                        <p className="info-block-effect">на рынке</p>
+                            </div>
+                            <div className="info-block">
+                                <p className="info-block-effect">гарантируем</p>
+                                <p className="info-block-effect">50%</p>
+                                <p className="info-block-effect">безопасность</p>
+                            </div>
+                            <div className="info-block">
+                                <p className="info-block-effect">календарик за</p>
+                                <p className="info-block-effect">2001</p>
+                                <p className="info-block-effect">в подарок</p>
+                            </div>
+                            <div className="info-block">
+                                <p className="info-block-effect">путешествие</p>
+                                <p className="info-block-effect">597</p>
+                                <p className="info-block-effect">дней</p>
+                            </div>
+                    </div>
+            </main>
+        </div>
+    );
 }
-
-export default App
