@@ -2,6 +2,7 @@ import spaceXlogo from '../src/assets/spaceXlogo.png'
 import marsIcon from '../src/assets/mars.png'
 import rocketIcon from '../src/assets/rocket.png'
 import './App.css'
+import InfoGrid from "./InfoGrid.tsx";
 
 export default function App() {
     return (
@@ -34,28 +35,7 @@ export default function App() {
                         <p className="subtitle">на красную планету</p>
                     </div>
                 </div>
-                <div className="info-grid">
-                    <div className="info-block">
-                        <p className="info-block-effect">мы</p>
-                        <p className="info-block-effect">1</p>
-                        <p className="info-block-effect">на рынке</p>
-                            </div>
-                            <div className="info-block">
-                                <p className="info-block-effect">гарантируем</p>
-                                <p className="info-block-effect">50%</p>
-                                <p className="info-block-effect">безопасность</p>
-                            </div>
-                            <div className="info-block">
-                                <p className="info-block-effect">календарик за</p>
-                                <p className="info-block-effect">2001</p>
-                                <p className="info-block-effect">в подарок</p>
-                            </div>
-                            <div className="info-block">
-                                <p className="info-block-effect">путешествие</p>
-                                <p className="info-block-effect">597</p>
-                                <p className="info-block-effect">дней</p>
-                            </div>
-                    </div>
+                <InfoGrid/>
             </main>
         </div>
     );

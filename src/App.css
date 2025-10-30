@@ -258,28 +258,83 @@ html {
 /* ====== Информационные карточки ====== */
 .info-grid {
   position: absolute;
-  left: 60%;
+  left: 64%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 10px;
   max-width: 40%;
-  width: 400px;
+  width: 300px;
+  z-index: 10;
 }
 
 .info-block {
   text-align: center;
   position: relative;
-  padding: 30px;
-  background: #f8f9fa;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
 }
 
+/* Упрощенная версия градиентных границ */
+.info-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.4) 0%,
+          rgba(255, 255, 255, 0.1) 30%,
+          rgba(255, 255, 255, 0.05) 70%,
+          rgba(255, 255, 255, 0.2) 100%
+  );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.info-block:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  border-left: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.info-value {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin: 15px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.info-desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+}
+
+/* Эффект при наведении */
 .info-block-effect {
   position: absolute;
   width: 100px;
   height: 100px;
-  background: radial-gradient(circle, #ff4757 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -288,22 +343,7 @@ html {
 }
 
 .info-block:hover .info-block-effect {
-  opacity: 0.6;
-}
-
-.info-label {
-  font-size: 14px;
-  color: #888;
-}
-
-.info-value {
-  font-size: 36px;
-  font-weight: bold;
-}
-
-.info-desc {
-  font-size: 14px;
-  color: #888;
+  opacity: 0.4;
 }
 
 /* ====== Адаптив ====== */
