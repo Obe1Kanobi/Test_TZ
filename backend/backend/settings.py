@@ -23,10 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+ersb6fb^)4e9fw4@1(h)6l@ifqgqbzn6#*_!drz-3=!=r@&mt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['testtz.ru', 'testtz.ru.swtest.ru', '127.0.0.1', 'localhost', 'www.testtz.ru']
 
 # Application definition
 
@@ -134,7 +133,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Флаг включения поддержки изображений в API
-ENABLE_IMAGES = True
+ENABLE_IMAGES = False
 
 # MEDIA (для загрузки изображений через админку)
 import os
