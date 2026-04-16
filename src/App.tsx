@@ -63,8 +63,6 @@ export default function App() {
                     <div className="corner-bottom-left" />
                     <img src={spaceXlogo} alt="SpaceX" />
                 </a>
-
-                {/* Один nav, внутри — map по элементам */}
                 <nav className="menu">
                     {toRender.map((item, idx) => (
                         <a key={item.id ?? `menu-${idx}`} href={item.url ?? '#'}>
@@ -73,7 +71,6 @@ export default function App() {
                     ))}
                 </nav>
             </header>
-
             <main className="all-content-block">
                 <div className="planet-block">
                     <img src={rocketIcon} alt="Rocket" className="rocket"/>
@@ -85,7 +82,6 @@ export default function App() {
                         <p className="subtitle">на красную планету</p>
                     </div>
                 </div>
-
                 <InfoGrid/>
             </main>
         </div>
